@@ -98,5 +98,5 @@ La rentabilidad (ROI) de la estrategia se indexa bajo 3 KPIs financieros:
 
 ---
 
-### Heber Bernal | Data Analyst & Analytics Specialist
+### Heber Bernal | Data Analyst
 *Conectando ciencia de datos con el valor estratégico de negocio.*
