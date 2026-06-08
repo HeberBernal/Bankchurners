@@ -42,21 +42,40 @@ A través de un mapa de calor con máscara triangular (para reducir el ruido vis
 
 ### 3. Evaluación de Disparidad (Sesgo de Género)
 El análisis numérico y distributivo a través de *Boxplots* reveló una brecha inicial en las líneas de crédito promedio:
-* **Hombres:** \$12,685.67 (Mediana significativamente superior y mayor dispersión).
+* **Hombres:** \$12,685.67 (Mediana superior y mayor dispersión).
 * **Mujeres:** \$5,023.85 (Distribución acotada y menor variabilidad).
 
-**Conclusión del Analista:** Aunque estadísticamente existe una disparidad, **no es posible afirmar un sesgo de género discriminatorio**. Al cruzar los datos con `Income_Category` y `Avg_Utilization_Ratio`, se demuestra que los límites se ajustan de manera imparcial a los mayores niveles de ingresos reportados por el segmento masculino y a sus necesidades transaccionales operativas para evitar la saturación de las tarjetas.
+**Conclusión del Analista:** Aunque existe una disparidad, no es posible afirmar un sesgo discriminatorio. Al cruzar los datos con ingresos, se demuestra que los límites se ajustan a los niveles de ingresos reportados por el segmento masculino y a sus necesidades transaccionales.
 
-### 4. Modelado Predictivo (Regresión Lineal)
-Se entrenó un modelo de **Regresión Lineal Múltiple** para predecir el Monto Total de Transacciones (`Total_Trans_Amt`) utilizando como predictores el conteo de transacciones, los productos activos y el límite de crédito:
-* **Métricas de Ajuste:** **$R^2 = 0.6801$** y **$R^2 \text{ Ajustada} = 0.6801$**.
-* **Caso de Prueba:** Para un cliente con 60 transacciones, 3 productos financieros y un límite de crédito de \$7,500, el modelo estima con precisión un gasto transaccional de **\$4,102.39**.
+---
 
-### 5. Analítica Prescriptiva y Retención de Cartera
-Evaluando el clasificador predictivo de abandono (*Naive Bayes*), se identificó que la inactividad acumulada es el principal predictor de fuga en el último año:
-* **Clientes Activos (< 3 meses inactivos):** Churn rate esperado del **11.11%**.
-* **Clientes Inactivos ($\geq$ 3 meses inactivos):** Churn rate esperado del **21.91%**.
-* **Impacto:** Un cliente inactivo tiene **1.97 veces más probabilidad de fuga**.
+## 🤖 Desempeño del Modelo Predictivo
+
+Tras el entrenamiento de la Regresión Lineal Múltiple para predecir el Monto Total de Transacciones (`Total_Trans_Amt`), el modelo arrojó las siguientes métricas de control:
+
+| Métrica | Resultado | Interpretación |
+| :--- | :--- | :--- |
+| **$R^2$** | **0.6801** | El 68.01% de la variabilidad del gasto es explicada por la actividad del cliente. |
+| **$R^2$ Ajustada** | **0.6801** | Ajuste óptimo del modelo considerando el número de variables predictoras utilizadas. |
+| **Caso de Prueba** | **\$4,102.39** | Gasto estimado para un cliente con 60 transacciones, 3 productos y \$7,500 de crédito. |
+
+> **Diagnóstico Pro: El alto $R^2$ (0.68)** valida sólidamente que el volumen transaccional, la cantidad de productos y la línea de crédito asignada son potentes predictores del comportamiento de consumo del usuario.
+
+---
+
+## 🤖 Análisis Prescriptivo y Retención de Cartera
+
+Al evaluar el clasificador de abandono (*Naive Bayes*), se identificó que la inactividad acumulada es el principal precursor de fuga en el último año:
+
+| Segmento de Cliente | Churn Rate Esperado | Diagnóstico de Riesgo |
+| :--- | :--- | :--- |
+| **Clientes Activos** (< 3 meses inactivos) | **11.11%** | Comportamiento transaccional saludable dentro de los parámetros normales. |
+| **Clientes Inactivos** ($\geq$ 3 meses inactivos) | **21.91%** | Zona de alerta crítica por abandono de cuenta o desuso del plástico. |
+| **Métrica de Impacto** | **1.97 veces** | Un cliente inactivo tiene casi el doble de probabilidad de fuga que uno activo. |
+
+> **Diagnóstico Pro: La inactividad trimestral es el detonante de fuga.** La probabilidad de abandono incrementa exponencialmente al cruzar el umbral de los 3 meses, exigiendo campañas de reactivación inmediatas.
+
+---
 
 ---
 
@@ -78,4 +97,6 @@ La rentabilidad (ROI) de la estrategia se indexa bajo 3 KPIs financieros:
 4. Ejecuta las celdas de forma secuencial para visualizar las tablas descriptivas y las gráficas interactivas de Seaborn.
 
 ---
-*Desarrollado con rigor técnico y enfoque estratégico de negocio.*
+
+### Heber Bernal | Data Analyst & Analytics Specialist
+*Conectando ciencia de datos con el valor estratégico de negocio.*
